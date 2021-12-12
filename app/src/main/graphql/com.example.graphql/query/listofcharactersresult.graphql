@@ -1,0 +1,8 @@
+query ListOfCharactersResult{
+    characters {
+        results {
+            name
+            image
+        }
+    }
+}
