@@ -3,8 +3,8 @@ package smir.shitab.graphqlapicalldemo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.coroutines.await
+import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.network.okHttpClient
 import com.example.graphql.query.ListOfCharactersResultQuery
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
 
-        apolloClient = ApolloClient.builder()
+        apolloClient = ApolloClient.Builder()
             .serverUrl(BASE_URL)
             .okHttpClient(okHttpClient)
             .build()
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun getData() {
-        val response = apolloClient.query(ListOfCharactersResultQuery()).await()
+        val response = apolloClient.query(ListOfCharactersResultQuery()).execute()
         Log.d("LaunchList", "Success ${response.data}")
     }
 

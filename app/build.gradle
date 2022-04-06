@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id("com.apollographql.apollo").version("2.5.11")
+    // id("com.apollographql.apollo").version("2.5.11")
+    id("com.apollographql.apollo3").version("3.0.0")
 
 }
 
@@ -35,7 +36,9 @@ android {
 
 apollo {
     // instruct the compiler to generate Kotlin models
-    generateKotlinModels.set(true)
+    useVersion2Compat()
+    // generateKotlinModels.set(true) // Used in V2
+
 }
 
 dependencies {
@@ -49,11 +52,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // The core runtime dependencies
-    implementation("com.apollographql.apollo:apollo-runtime:2.5.11")
+    //implementation("com.apollographql.apollo:apollo-runtime:2.5.11") // Used in V2
+    implementation("com.apollographql.apollo3:apollo-runtime:3.0.0")
     // Coroutines extensions for easier asynchronicity handling
-    implementation("com.apollographql.apollo:apollo-coroutines-support:2.5.11")
+    //implementation("com.apollographql.apollo:apollo-coroutines-support:2.5.11") // Used in V2
+    //implementation("com.apollographql.apollo:apollo-android-support:2.5.11") // Used in V2
+
+    // Using Apollo API
+    implementation("com.apollographql.apollo3:apollo-api:3.0.0")
 
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
 
 }
